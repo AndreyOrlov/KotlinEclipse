@@ -1,0 +1,69 @@
+grammar org.xtext.example.task1.LangExample with org.eclipse.xtext.xbase.Xbase
+
+generate langExample "http://www.xtext.org/example/task1/LangExample"
+
+Model:
+	elements += Type*	
+;
+
+Type:
+	Function | VarDef | Class | Trait
+;
+
+Function:
+	'fun' name = ID '(' (def= VarDef (',' def2=VarDef)*)? ')' 
+	(('=' INT) |('{' stmts +=SeqStatement* '}'))?
+;
+
+VarDef:
+	name = ID ':' type = TypeName
+;
+TypeName:
+	name = ID
+;
+
+Class:
+	'class' name = ID ('{' elements += Type* '}')? 
+;
+
+Trait:
+	'trait' name = ID ':' class=[Class]',' validId = ID '(' ')' '{'
+	'}'
+;
+
+//---------------------------------------------------------------------
+SeqStatement:
+	stmt=Statement ';' | '{' (stmts+=Statement ';')* '}' 
+;
+
+Statement:
+	VarDef | Assign | If | While
+;
+
+Assign :
+	var=[VarDef] ':=' expr=Expression 
+;
+
+If:
+	'if' '(' expr=Expression ')' stmt1=SeqStatement 'else' stmt2=SeqStatement
+;
+
+While:
+	'while' '(' expr=Expression ')' stmt=SeqStatement
+;
+
+Expression:
+	SimpleExpression | BinExpression
+;
+
+BinExpression:
+	expr1=SimpleExpression Operation expr=SimpleExpression
+;
+
+SimpleExpression:
+	INT | var=[VarDef]
+;
+
+Operation:
+	'+' | '-' | '*' | '/' | '%' | '==' | '!=' | '>=' | '<=' | '>' | '<'
+;

@@ -1,0 +1,10 @@
+SMAP
+LangExampleJvmModelInferrer.java
+Xtend
+*S Xtend
+*F
++ 0 LangExampleJvmModelInferrer.xtend
+src/org/xtext/example/task1/jvmmodel/LangExampleJvmModelInferrer.xtend
+*L
+47:54,3
+*E
