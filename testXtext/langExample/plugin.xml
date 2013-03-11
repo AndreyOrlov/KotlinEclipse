@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.xtext.org/example/task1/LangExample" 
+       class = "org.xtext.example.task1.langExample.LangExamplePackage"
+       genModel = "org/xtext/example/task1/LangExample.genmodel" /> 
+	
+  </extension>
+
+
+
+
+
+</plugin>
