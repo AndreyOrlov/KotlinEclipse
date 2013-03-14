@@ -18,6 +18,7 @@ Function:
 VarDef:
 	name = ID ':' type = TypeName
 ;
+
 TypeName:
 	name = ID
 ;
@@ -33,7 +34,7 @@ Trait:
 
 //---------------------------------------------------------------------
 SeqStatement:
-	stmt=Statement ';' | '{' (stmts+=Statement ';')* '}' 
+	stmt=Statement | '{' (stmts+=Statement)* '}' 
 ;
 
 Statement:
@@ -41,15 +42,15 @@ Statement:
 ;
 
 Assign :
-	var=[VarDef] ':=' expr=Expression 
+	var=[VarDef] ':=' expr=Expression ';' 
 ;
 
 If:
-	'if' '(' expr=Expression ')' stmt1=SeqStatement 'else' stmt2=SeqStatement
+	'if' '(' expr=Expression ')' stmt1=SeqStatement ('else' stmt2=SeqStatement)? ';'?
 ;
 
 While:
-	'while' '(' expr=Expression ')' stmt=SeqStatement
+	'while' '(' expr=Expression ')' stmt=SeqStatement ';'?
 ;
 
 Expression:
@@ -57,7 +58,7 @@ Expression:
 ;
 
 BinExpression:
-	expr1=SimpleExpression Operation expr=SimpleExpression
+	expr1=SimpleExpression Operation expr=Expression
 ;
 
 SimpleExpression:
