@@ -1,0 +1,56 @@
+grammar org.xtext.example.mydsl.TestL with org.eclipse.xtext.common.Terminals
+
+generate testL "http://www.xtext.org/example/mydsl/TestL"
+
+Program:
+	declarations+=Declaration*
+;
+
+Declaration:
+	(FunctionDeclaration (FunctionBody | FunctionInitializer)) | ClassDeclaration | TraitDeclaration
+;
+
+FunctionBody:
+	"{" "}"
+;
+
+FunctionDeclaration:
+	"fun" ID "(" FormalParameterList ")"	
+;
+
+FunctionInitializer:
+	"=" Value
+;
+
+Value:
+	NUMBER
+;
+
+terminal NUMBER:
+	('+'|'-')?('1'..'9')+
+;
+
+FormalParameterList:
+	(FormalParameter ("," FormalParameter)*)?
+;
+
+FormalParameter:
+	ID ":" ID
+;
+
+ClassDeclaration:
+	"class" ID ("{" "}")?
+;
+
+TraitDeclaration:
+	"trait" ID ":" TraitsList "{" "}"
+;
+
+TraitsList:
+	(TraitListItem ("," TraitListItem)*)?
+;
+
+TraitListItem:
+	ID ("(" ")")?
+;
+
